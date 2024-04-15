@@ -28,6 +28,7 @@
                 height: 100vh;
                 margin: 0;
                 font-family: Arial, sans-serif;
+                color: #f0f0f0;
             }
             input[type="color"] {
                 width: 200px;
@@ -38,7 +39,6 @@
             }
             input[type="submit"], h1, h2 {
                 background-color: #4F94F0;
-                color: #f0f0f0;
                 border: none;
                 border-radius: 5px;
                 padding: 10px 20px;
@@ -54,11 +54,6 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-            }
-            p {
-                color: #f0f0f0;
-                text-align: center;
-                max-width: 500px;
             }
         </style>
         <!--CSS-->

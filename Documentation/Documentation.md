@@ -15,15 +15,16 @@
     1. [🚬VPN Settings For A Client](#🚬vpn-settings-for-a-client)
     2. [🚬Server Settings](#🚬server-settings)
     3. [🚬VPN Test](#🚬vpn-test)
-7. [🛡️Firewall Rules](#🛡️firewall-rules)
-8. [🪖DMZ Services](#🪖dmz-services)
-9. [🧮🧮Testing](#🧮🧮testing)
-10. [📁Attachments](#📁attachments)
+7. [🕸️Redundant Web Servers](#🕸️redundant-web-servers)
+8. [🛡️Firewall Rules](#🛡️firewall-rules)
+9. [🪖DMZ Services](#🪖dmz-services)
+10. [🧮Testing](#🧮testing)
+11. [📁Attachments](#📁attachments)
     1. [📁Router Configurations](#📁router-configurations)
     2. [📁Firewall Configurations](#📁firewall-configurations)
     3. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
     4. [📁Timesheets](#📁timesheets)
-11. [🔗References](#🔗references)
+12. [🔗References](#🔗references)
 
 ---
 
@@ -51,9 +52,32 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 ![LAN Design](/images/lan_design.png)
 
 ## 🔎Addressing/names
-> Tabel met namen/interfaces/adressen routers
-> Tabel met namen/interfaces/adressen switchen
-> Tabel met namen/interfaces/adressen servers
+
+### 🔎Globel
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Router 1        | 10.10.1.1, 255.255.255.254  | Gig0/0    |
+| Router 2        | 10.10.1.5, 255.255.255.254  | Gig0/0    |
+| Router 1        | 10.10.4.1, 255.255.255.0    | Gig1/0    |
+| Router 2        | 10.10.4.2, 255.255.255.0    | Gig1/0    |
+
+### 🔎LAN
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Server 3 (DNS)  | 10.10.3.10, 255.255.255.0   | Fa0       |
+| Server 4 (DHCP) | 10.10.3.11, 255.255.255.0   | Fa0       |
+| Router 3        | 10.10.3.1, 255.255.255.0    | Gig2/0    |
+| Router 3        | 10.10.1.2, 255.255.255.254  | Gig0/0    |
+| Router 3        | 10.10.1.6, 255.255.255.254  | Gig1/0    |
+| Switch 3        | 10.10.3.2, 255.255.255.0    | Lo0       |
+
+### 🔎DMZ
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Server 1 (Web)  | 10.10.4.10, 255.255.255.0   | Gig0      |
+| Server 1 (Web)  | 10.10.4.11, 255.255.255.0   | Gig1      |
+| Server 2 (Web)  | 10.10.4.12, 255.255.255.0   | Gig0      |
+| Server 2 (Web)  | 10.10.4.13, 255.255.255.0   | Gig1      |
 
 ## 🚬VPN Services
 
@@ -63,7 +87,7 @@ Tailscale utilizes WireGuard's encryption and authentication mechanisms to estab
 
 ### 🚬VPN Settings For A Client
 
-#### Linux
+#### 🚬Linux
 
 - Open the terminal and run:
 
@@ -80,11 +104,11 @@ sudo tailscale up
 
 - Click Connect and you should be connected to the tailnet
 
-#### Windows
+#### 🚬Windows
 
 - Download the following msi installer
 
-https://tailscale.com/download
+[Tailscale Download](https://tailscale.com/download)
 
 - Run the installer
 
@@ -101,7 +125,7 @@ sudo curl -fsSL https://tailscale.com/install.sh | sh
 
 - Enter the root password
 
-- Request an auth key at: https://login.tailscale.com/admin/settings/keys
+- Request an auth key at: [Tailscale Login](https://login.tailscale.com/admin/settings/keys)
 
 - Use the auth key in the following command and add `--ssh` so you can use tailscale ssh
 ```bash
@@ -112,26 +136,85 @@ sudo tailscale up --authkey=[Authkey] --ssh
 
 ### 🚬VPN Settings For A Router
 
-We will be using pfSense as router software, which comes with a package manager including the package "tailscale". Additionally, we will utilize the subnet-router functionality so that we can access the rest of the network via the router by advertising routes.
+Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
 
-- After installation select the package manager menu under System
-
-- Then select available packages and search for `Tailscale`
-
-- Now go to `tailscale` under `VPN`
-
-- Request an auth key at: https://login.tailscale.com/admin/settings/keys
-
-- Then go to authentication and paste the key, then save
-
-- Then go to Settings and fill in `Advertised routes` with the subnet you want to expose to your VPN client
-
-- Then save
 
 
 ### 🚬VPN Test
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
 > Schrijf de testprocedure hiervoor uit. Welke aanpassingen moest je maken aan de routetabel of aan de encryptie?
+
+## 🕸️Redundant Web Servers
+> This will all be achieved with apache2 and a simple database a .csv file. A webpage will be hosted on multiple web servers. On this webpage, you can modify a value that will change the background color of the webpage. This new value will be stored in a file or database. Subsequently, the other web servers will be automatically updated with the new background.
+
+- Database
+    - [CSV File](/Scripts/database.csv)
+- Apache2 Webserver 1
+    - [Index File](/Scripts/index.php)
+    - [Apache2 Config](/Scripts/webserver1.conf)
+- Apache2 Webserver 2
+    - [Index File](/Scripts/index.php)
+    - [Apache2 Config](/Scripts/webserver2.conf)
+- Apache2 Load Balancer
+    - [Load Balancer Config](/Scripts/load_balancer.conf)
+
+> Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
+
+```bash
+# Basic setup:
+sudo apt update && sudo apt upgrade -y
+sudo do-release-upgrade -d # Optional - upgrade to latest Ubuntu LTS
+sudo apt install openssh-server -y
+sudo apt install apache2 -y
+sudo apt install php libapache2-mod-php -y
+sudo apt install git -y
+sudo a2enmod proxy proxy_http
+sudo a2enmod lbmethod_byrequests
+
+# Firewall Configuratie:
+sudo ufw allow 80
+sudo ufw allow 8001
+sudo ufw allow 8002
+sudo ufw enable # Or sudo ufw disable
+
+# Configure static IP for the server:
+sudo nano /etc/netplan/00-installer-config.yaml
+# Add the following:
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses: [192.168.70.133/24]
+      gateway4: [192.168.70.1/24]
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+
+sudo netplan apply
+
+# Configure Webserver 1 & 2 + Load Balancer:
+sudo rm -r /var/www/html
+sudo rm -r /etc/apache2/sites-available/000-default.conf
+sudo rm -r /etc/apache2/sites-available/default-ssl.conf
+sudo rm -r /etc/apache2/sites-enabled/000-default.conf
+git clone https://github.com/EliasDeHondt/Netwerken2-ISB.git
+sudo mkdir /var/www/webserver1
+sudo mkdir /var/www/webserver2
+sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver1/
+sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver2/
+sudo cp Netwerken2-ISB/Scripts/redundant-web-servers-demo.conf.conf /etc/apache2/sites-available/
+sudo a2ensite redundant-web-servers-demo.conf
+
+# Database setup:
+sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
+sudo chmod 777 /var/www/database.csv
+
+# Clean up:
+sudo systemctl reload apache2
+sudo rm -r Netwerken2-ISB
+history -c # Clear history
+```
 
 ## 🛡️Firewall Rules
 > Firewall voor je LAN
@@ -142,7 +225,7 @@ We will be using pfSense as router software, which comes with a package manager 
 ## 🪖DMZ Services
 > Geef hier een opsomming van de diensten en leg de werking uit van de high availability oplossing.
 
-## 🧮🧮Testing
+## 🧮Testing
 > Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.
 
 ## 📁Attachments
@@ -153,9 +236,21 @@ We will be using pfSense as router software, which comes with a package manager 
 > (deze mogen ook Linux iptables regels zijn, of een vyos configuratie of  Cisco router configuraties)
 
 ### 📁Server Configurations & Scripts
-> Geef hier enkel de nodige software en speciale opties/bestanden, bij voorkeur in een script 
+[Scripts Folder](/Scripts)
 
 ### 📁Timesheets
-> Wie heeft wat wanneer gedaan. Bereken ook ongeveer het totaal aantal uren dat jullie aan de opdracht besteedt hebben. bv:
+| Name Student  | Date       | Time  | Description           |
+|---------------|------------|-------|-----------------------|
+| Elias De Hondt| 15/04/2024 | 2h    | Documentation         |
+| Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
+| Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
+| Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
+| Elias De Hondt| 15/04/2024 | 5h    | Redundant Web Servers |
 
 ## 🔗References
+- [Tailscale](https://tailscale.com)
+- [Wireguard](https://www.wireguard.com)
+- [Pfsense](https://www.pfsense.org)
+- [Vyos](https://www.vyos.io)
+- [Apache2](https://httpd.apache.org)
+- [Ubuntu](https://ubuntu.com)

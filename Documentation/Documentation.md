@@ -57,11 +57,66 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 
 ## 🚬VPN Services
 
-### 🚬VPN Settings For A Client
-> Welke software kan je client gebruiken.
+As a VPN solution we will use tailscale, this is a zero-config VPN based on wireguard.
 
-### 🚬Server Settings
-> Op welke manier werkt je VPN-opstelling op de server?
+Tailscale utilizes WireGuard's encryption and authentication mechanisms to establish secure peer-to-peer connections between devices. It assigns each device a unique tailnet IP and has dashboard for easy maintainability.
+
+### 🚬VPN Settings For A Client
+
+#### Linux
+
+- Open the terminal and run:
+
+```bash
+sudo curl -fsSL https://tailscale.com/install.sh | sh
+```
+
+- Enter the root password and run the following command
+
+```bash
+sudo tailscale up
+```
+- Copy and Paste the link in your browser and login
+
+![Tailscale Login](../Images/image.png)
+
+- Click Connect and you should be connected to the tailnet
+
+#### Windows
+
+- Download the following msi installer
+
+https://tailscale.com/download
+
+- Run the installer
+
+- Click Next and Install
+
+- Then login and you should be connected to the tailnet
+
+### 🚬VPN Settings For A Server
+- Open the terminal and run:
+
+```bash
+sudo curl -fsSL https://tailscale.com/install.sh | sh
+```
+
+- Enter the root password
+
+- Request an auth key at: https://login.tailscale.com/admin/settings/keys
+
+- Use the auth key in the following command and add `--ssh` so you can use tailscale ssh
+```bash
+sudo tailscale up --authkey=[Authkey] --ssh
+```
+
+- The server should now be connected to the tailnet
+
+### 🚬VPN Settings For A Router
+
+Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
+
+
 
 ### 🚬VPN Test
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.

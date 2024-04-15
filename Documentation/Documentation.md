@@ -171,7 +171,11 @@ sudo apt install git -y
 sudo a2enmod proxy proxy_http
 sudo a2enmod lbmethod_byrequests
 
-
+# Firewall Configuratie:
+sudo ufw allow 80
+sudo ufw allow 8001
+sudo ufw allow 8002
+sudo ufw enable # Or sudo ufw disable
 
 # Configure static IP for the server:
 sudo nano /etc/netplan/00-installer-config.yaml
@@ -189,7 +193,7 @@ network:
 
 sudo netplan apply
 
-# Configure Webserver 1 and 2:
+# Configure Webserver 1 & 2 + Load Balancer:
 sudo rm -r /var/www/html
 sudo rm -r /etc/apache2/sites-available/000-default.conf
 sudo rm -r /etc/apache2/sites-available/default-ssl.conf
@@ -199,14 +203,8 @@ sudo mkdir /var/www/webserver1
 sudo mkdir /var/www/webserver2
 sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver1/
 sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver2/
-sudo cp Netwerken2-ISB/Scripts/webserver1.conf /etc/apache2/sites-available/
-sudo cp Netwerken2-ISB/Scripts/webserver2.conf /etc/apache2/sites-available/
-sudo a2ensite webserver1.conf
-sudo a2ensite webserver2.conf
-
-# Configure Load Balancer:
-sudo cp Netwerken2-ISB/Scripts/load_balancer.conf /etc/apache2/sites-available/
-sudo a2ensite load_balancer.conf
+sudo cp Netwerken2-ISB/Scripts/redundant-web-servers-demo.conf.conf /etc/apache2/sites-available/
+sudo a2ensite redundant-web-servers-demo.conf
 
 # Database setup:
 sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
@@ -217,11 +215,6 @@ sudo systemctl reload apache2
 sudo rm -r Netwerken2-ISB
 history -c # Clear history
 ```
-
-
-
-
-
 
 ## 🛡️Firewall Rules
 > Firewall voor je LAN
@@ -246,15 +239,18 @@ history -c # Clear history
 [Scripts Folder](/Scripts)
 
 ### 📁Timesheets
-| Name Student  | Date       | Time  | Description      |
-|---------------|------------|-------|------------------|
-| Elias De Hondt| 15/04/2024 | 2h    | Documentation    |
-| Kobe Wijnants | 15/04/2024 | 2h    | Documentation    |
-| Elias De Hondt| 15/04/2024 | 3h    | Network Design   |
-| Kobe Wijnants | 15/04/2024 | 30min | Addressing/names |
+| Name Student  | Date       | Time  | Description           |
+|---------------|------------|-------|-----------------------|
+| Elias De Hondt| 15/04/2024 | 2h    | Documentation         |
+| Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
+| Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
+| Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
+| Elias De Hondt| 15/04/2024 | 5h    | Redundant Web Servers |
 
 ## 🔗References
 - [Tailscale](https://tailscale.com)
 - [Wireguard](https://www.wireguard.com)
 - [Pfsense](https://www.pfsense.org)
 - [Vyos](https://www.vyos.io)
+- [Apache2](https://httpd.apache.org)
+- [Ubuntu](https://ubuntu.com)

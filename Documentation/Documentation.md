@@ -55,8 +55,6 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 > Tabel met namen/interfaces/adressen switchen
 > Tabel met namen/interfaces/adressen servers
 
-
-
 ## 🚬VPN Services
 
 ### 🚬VPN Settings For A Client

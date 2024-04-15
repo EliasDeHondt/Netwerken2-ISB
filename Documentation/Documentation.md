@@ -78,8 +78,6 @@ sudo tailscale up
 ```
 - Copy and Paste the link in your browser and login
 
-![Tailscale Login](../Images/image.png)
-
 - Click Connect and you should be connected to the tailnet
 
 #### Windows
@@ -114,8 +112,21 @@ sudo tailscale up --authkey=[Authkey] --ssh
 
 ### 🚬VPN Settings For A Router
 
-Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
+We will be using pfSense as router software, which comes with a package manager including the package "tailscale". Additionally, we will utilize the subnet-router functionality so that we can access the rest of the network via the router by advertising routes.
 
+- After installation select the package manager menu under System
+
+- Then select available packages and search for `Tailscale`
+
+- Now go to `tailscale` under `VPN`
+
+- Request an auth key at: https://login.tailscale.com/admin/settings/keys
+
+- Then go to authentication and paste the key, then save
+
+- Then go to Settings and fill in `Advertised routes` with the subnet you want to expose to your VPN client
+
+- Then save
 
 
 ### 🚬VPN Test

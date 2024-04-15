@@ -151,12 +151,74 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
     - [CSV File](/Scripts/database.csv)
 - Apache2 Webserver 1
     - [Index File](/Scripts/index.php)
-    - [Apache2 Config](/Scripts/webserver.conf)
+    - [Apache2 Config](/Scripts/webserver1.conf)
 - Apache2 Webserver 2
     - [Index File](/Scripts/index.php)
-    - [Apache2 Config](/Scripts/webserver.conf)
+    - [Apache2 Config](/Scripts/webserver2.conf)
 - Apache2 Load Balancer
     - [Load Balancer Config](/Scripts/load_balancer.conf)
+
+> Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
+
+```bash
+# Basic setup:
+sudo apt update && sudo apt upgrade -y
+sudo do-release-upgrade -d # Optional - upgrade to latest Ubuntu LTS
+sudo apt install openssh-server -y
+sudo apt install apache2 -y
+sudo apt install php libapache2-mod-php -y
+sudo apt install git -y
+sudo a2enmod proxy proxy_http
+sudo a2enmod lbmethod_byrequests
+
+
+
+# Configure static IP for the server:
+sudo nano /etc/netplan/00-installer-config.yaml
+# Add the following:
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses: [192.168.70.133/24]
+      gateway4: [192.168.70.1/24]
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+
+sudo netplan apply
+
+# Configure Webserver 1 and 2:
+sudo rm -r /var/www/html
+sudo rm -r /etc/apache2/sites-available/000-default.conf
+sudo rm -r /etc/apache2/sites-available/default-ssl.conf
+sudo rm -r /etc/apache2/sites-enabled/000-default.conf
+git clone https://github.com/EliasDeHondt/Netwerken2-ISB.git
+sudo mkdir /var/www/webserver1
+sudo mkdir /var/www/webserver2
+sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver1/
+sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver2/
+sudo cp Netwerken2-ISB/Scripts/webserver1.conf /etc/apache2/sites-available/
+sudo cp Netwerken2-ISB/Scripts/webserver2.conf /etc/apache2/sites-available/
+sudo a2ensite webserver1.conf
+sudo a2ensite webserver2.conf
+
+# Configure Load Balancer:
+sudo cp Netwerken2-ISB/Scripts/load_balancer.conf /etc/apache2/sites-available/
+sudo a2ensite load_balancer.conf
+
+# Database setup:
+sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
+sudo chmod 777 /var/www/database.csv
+
+# Clean up:
+sudo systemctl reload apache2
+sudo rm -r Netwerken2-ISB
+history -c # Clear history
+```
+
+
 
 
 
@@ -181,7 +243,7 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 > (deze mogen ook Linux iptables regels zijn, of een vyos configuratie of  Cisco router configuraties)
 
 ### 📁Server Configurations & Scripts
-> Geef hier enkel de nodige software en speciale opties/bestanden, bij voorkeur in een script 
+[Scripts Folder](/Scripts)
 
 ### 📁Timesheets
 | Name Student  | Date       | Time  | Description      |

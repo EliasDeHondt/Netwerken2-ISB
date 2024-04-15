@@ -138,8 +138,6 @@ sudo tailscale up --authkey=[Authkey] --ssh
 
 Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
 
-
-
 ### 🚬VPN Test
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
 > Schrijf de testprocedure hiervoor uit. Welke aanpassingen moest je maken aan de routetabel of aan de encryptie?

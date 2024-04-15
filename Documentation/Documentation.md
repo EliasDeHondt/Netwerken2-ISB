@@ -166,10 +166,14 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 > Geef hier enkel de nodige software en speciale opties/bestanden, bij voorkeur in een script 
 
 ### 📁Timesheets
-> Wie heeft wat wanneer gedaan. Bereken ook ongeveer het totaal aantal uren dat jullie aan de opdracht besteedt hebben. bv:
+| Name Student  | Date       | Time  | Description      |
+|---------------|------------|-------|------------------|
+| Elias De Hondt| 15/04/2024 | 2h    | Documentation    |
+| Kobe Wijnants | 15/04/2024 | 2h    | Documentation    |
+| Elias De Hondt| 15/04/2024 | 3h    | Network Design   |
+| Kobe Wijnants | 15/04/2024 | 30min | Addressing/names |
 
 ## 🔗References
-
 - [Tailscale](https://tailscale.com)
 - [Wireguard](https://www.wireguard.com)
 - [Pfsense](https://www.pfsense.org)

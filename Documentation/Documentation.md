@@ -34,21 +34,21 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 ## 💩Group members
 
 - Student 1: Elias De Hondt 0160712-80
-- Student 2: Kobe Wijnants
+- Student 2: Kobe Wijnants 0163403-55
 
 ## 🎨Network Design
 
 ### 🎨Globel Design
-> Globaal schema met wolkjes van je netwerk
+![Globel Design](/images/globel_design.png)
 
 ### 🎨WAN Design
-> Schema van de verbinding met het www.
+![WAN Design](/images/wan_design.png)
 
 ### 🎨DMZ Design
-> Schema van de routers/switchen/servers in de DMZ
+![DMZ Design](/images/dmz_design.png)
 
 ### 🎨LAN Design
-> Schema van het interne netwerk met clients/servers
+![LAN Design](/images/lan_design.png)
 
 ## 🔎Addressing/names
 > Tabel met namen/interfaces/adressen routers

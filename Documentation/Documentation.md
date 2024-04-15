@@ -101,7 +101,7 @@ sudo tailscale up
 ```
 - Copy and Paste the link in your browser and login
 
-![Tailscale Login](Images/image.png)
+![Tailscale Login](/Images/tailscale.png)
 
 - Click Connect and you should be connected to the tailnet
 

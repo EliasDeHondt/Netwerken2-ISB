@@ -53,31 +53,30 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 ## 🔎Addressing/names
 
 ### 🔎Globel
-
-| Name            | IP Address | Interface |
-|-----------------|------------|-----------|
-| Router 1        | 10.10.1.1  | Gig0/0    |
-| Router 2        | 10.10.2.1  | Gig0/0    |
-| Router 1        | 10.10.4.1  | Gig1/0    |
-| Router 2        | 10.10.4.2  | Gig1/0    |
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Router 1        | 10.10.1.1, 255.255.255.254  | Gig0/0    |
+| Router 2        | 10.10.1.5, 255.255.255.254  | Gig0/0    |
+| Router 1        | 10.10.4.1, 255.255.255.0    | Gig1/0    |
+| Router 2        | 10.10.4.2, 255.255.255.0    | Gig1/0    |
 
 ### 🔎LAN
-| Name            | IP Address | Interface |
-|-----------------|------------|-----------|
-| Server 3 (DNS)  | 10.10.3.10 | Fa0       |
-| Server 4 (DHCP) | 10.10.3.11 | Fa0       |
-| Router 3        | 10.10.3.1  | Gig2/0    |
-| Router 3        | 10.10.1.2  | Gig0/0    |
-| Router 3        | 10.10.2.2  | Gig1/0    |
-| Switch 3        | 10.10.3.2  | Lo0       |
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Server 3 (DNS)  | 10.10.3.10, 255.255.255.0   | Fa0       |
+| Server 4 (DHCP) | 10.10.3.11, 255.255.255.0   | Fa0       |
+| Router 3        | 10.10.3.1, 255.255.255.0    | Gig2/0    |
+| Router 3        | 10.10.1.2, 255.255.255.254  | Gig0/0    |
+| Router 3        | 10.10.1.6, 255.255.255.254  | Gig1/0    |
+| Switch 3        | 10.10.3.2, 255.255.255.0    | Lo0       |
 
 ### 🔎DMZ
-| Name            | IP Address | Interface |
-|-----------------|------------|-----------|
-| Server 1 (Web)  | 10.10.4.10 | Gig0      |
-| Server 1 (Web)  | 10.10.4.11 | Gig1      |
-| Server 2 (Web)  | 10.10.4.12 | Gig0      |
-| Server 2 (Web)  | 10.10.4.13 | Gig1      |
+| Name            | IP Address                  | Interface |
+|-----------------|-----------------------------|-----------|
+| Server 1 (Web)  | 10.10.4.10, 255.255.255.0   | Gig0      |
+| Server 1 (Web)  | 10.10.4.11, 255.255.255.0   | Gig1      |
+| Server 2 (Web)  | 10.10.4.12, 255.255.255.0   | Gig0      |
+| Server 2 (Web)  | 10.10.4.13, 255.255.255.0   | Gig1      |
 
 ## 🚬VPN Services
 
@@ -102,7 +101,7 @@ sudo tailscale up
 ```
 - Copy and Paste the link in your browser and login
 
-![Tailscale Login](../Images/image.png)
+![Tailscale Login](Images/image.png)
 
 - Click Connect and you should be connected to the tailnet
 
@@ -110,7 +109,7 @@ sudo tailscale up
 
 - Download the following msi installer
 
-https://tailscale.com/download
+[Tailscale Download](https://tailscale.com/download)
 
 - Run the installer
 
@@ -139,8 +138,6 @@ sudo tailscale up --authkey=[Authkey] --ssh
 ### 🚬VPN Settings For A Router
 
 Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
-
-
 
 ### 🚬VPN Test
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
@@ -172,3 +169,7 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 > Wie heeft wat wanneer gedaan. Bereken ook ongeveer het totaal aantal uren dat jullie aan de opdracht besteedt hebben. bv:
 
 ## 🔗References
+
+- [Tailscale](https://tailscale.com)
+- [Wireguard](https://www.wireguard.com)
+- [Pfsense](https://www.pfsense.org)

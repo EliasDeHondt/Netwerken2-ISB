@@ -15,15 +15,16 @@
     1. [🚬VPN Settings For A Client](#🚬vpn-settings-for-a-client)
     2. [🚬Server Settings](#🚬server-settings)
     3. [🚬VPN Test](#🚬vpn-test)
-7. [🛡️Firewall Rules](#🛡️firewall-rules)
-8. [🪖DMZ Services](#🪖dmz-services)
-9. [🧮🧮Testing](#🧮🧮testing)
-10. [📁Attachments](#📁attachments)
+7. [🕸️Redundant Web Servers](#🕸️redundant-web-servers)
+8. [🛡️Firewall Rules](#🛡️firewall-rules)
+9. [🪖DMZ Services](#🪖dmz-services)
+10. [🧮Testing](#🧮testing)
+11. [📁Attachments](#📁attachments)
     1. [📁Router Configurations](#📁router-configurations)
     2. [📁Firewall Configurations](#📁firewall-configurations)
     3. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
     4. [📁Timesheets](#📁timesheets)
-11. [🔗References](#🔗references)
+12. [🔗References](#🔗references)
 
 ---
 
@@ -86,7 +87,7 @@ Tailscale utilizes WireGuard's encryption and authentication mechanisms to estab
 
 ### 🚬VPN Settings For A Client
 
-#### Linux
+#### 🚬Linux
 
 - Open the terminal and run:
 
@@ -105,7 +106,7 @@ sudo tailscale up
 
 - Click Connect and you should be connected to the tailnet
 
-#### Windows
+#### 🚬Windows
 
 - Download the following msi installer
 
@@ -126,7 +127,7 @@ sudo curl -fsSL https://tailscale.com/install.sh | sh
 
 - Enter the root password
 
-- Request an auth key at: https://login.tailscale.com/admin/settings/keys
+- Request an auth key at: [Tailscale Login](https://login.tailscale.com/admin/settings/keys)
 
 - Use the auth key in the following command and add `--ssh` so you can use tailscale ssh
 ```bash
@@ -143,6 +144,23 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
 > Schrijf de testprocedure hiervoor uit. Welke aanpassingen moest je maken aan de routetabel of aan de encryptie?
 
+## 🕸️Redundant Web Servers
+> This will all be achieved with apache2 and a simple database a .csv file. A webpage will be hosted on multiple web servers. On this webpage, you can modify a value that will change the background color of the webpage. This new value will be stored in a file or database. Subsequently, the other web servers will be automatically updated with the new background.
+
+- Database
+    - [CSV File](/Scripts/database.csv)
+- Apache2 Webserver 1
+    - [Index File](/Scripts/index.php)
+    - [Apache2 Config](/Scripts/webserver.conf)
+- Apache2 Webserver 2
+    - [Index File](/Scripts/index.php)
+    - [Apache2 Config](/Scripts/webserver.conf)
+- Apache2 Load Balancer
+    - [Load Balancer Config](/Scripts/load_balancer.conf)
+
+
+
+
 ## 🛡️Firewall Rules
 > Firewall voor je LAN
 > Schrijf alle regels die gelden tussen de LAN en de DMZ/Internet in woorden uit.
@@ -152,7 +170,7 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 ## 🪖DMZ Services
 > Geef hier een opsomming van de diensten en leg de werking uit van de high availability oplossing.
 
-## 🧮🧮Testing
+## 🧮Testing
 > Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.
 
 ## 📁Attachments
@@ -177,3 +195,4 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 - [Tailscale](https://tailscale.com)
 - [Wireguard](https://www.wireguard.com)
 - [Pfsense](https://www.pfsense.org)
+- [Vyos](https://www.vyos.io)

@@ -51,9 +51,33 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 ![LAN Design](/images/lan_design.png)
 
 ## 🔎Addressing/names
-> Tabel met namen/interfaces/adressen routers
-> Tabel met namen/interfaces/adressen switchen
-> Tabel met namen/interfaces/adressen servers
+
+### 🔎Globel
+
+| Name            | IP Address | Interface |
+|-----------------|------------|-----------|
+| Router 1        | 10.10.1.1  | Gig0/0    |
+| Router 2        | 10.10.2.1  | Gig0/0    |
+| Router 1        | 10.10.4.1  | Gig1/0    |
+| Router 2        | 10.10.4.2  | Gig1/0    |
+
+### 🔎LAN
+| Name            | IP Address | Interface |
+|-----------------|------------|-----------|
+| Server 3 (DNS)  | 10.10.3.10 | Fa0       |
+| Server 4 (DHCP) | 10.10.3.11 | Fa0       |
+| Router 3        | 10.10.3.1  | Gig2/0    |
+| Router 3        | 10.10.1.2  | Gig0/0    |
+| Router 3        | 10.10.2.2  | Gig1/0    |
+| Switch 3        | 10.10.3.2  | Lo0       |
+
+### 🔎DMZ
+| Name            | IP Address | Interface |
+|-----------------|------------|-----------|
+| Server 1 (Web)  | 10.10.4.10 | Gig0      |
+| Server 1 (Web)  | 10.10.4.11 | Gig1      |
+| Server 2 (Web)  | 10.10.4.12 | Gig0      |
+| Server 2 (Web)  | 10.10.4.13 | Gig1      |
 
 ## 🚬VPN Services
 

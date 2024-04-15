@@ -102,8 +102,6 @@ sudo tailscale up
 ```
 - Copy and Paste the link in your browser and login
 
-![Tailscale Login](/Images/tailscale.png)
-
 - Click Connect and you should be connected to the tailnet
 
 #### 🚬Windows
@@ -139,6 +137,8 @@ sudo tailscale up --authkey=[Authkey] --ssh
 ### 🚬VPN Settings For A Router
 
 Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
+
+
 
 ### 🚬VPN Test
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.

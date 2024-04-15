@@ -19,12 +19,13 @@
 8. [🛡️Firewall Rules](#🛡️firewall-rules)
 9. [🪖DMZ Services](#🪖dmz-services)
 10. [🧮Testing](#🧮testing)
-11. [📁Attachments](#📁attachments)
+11. [🚀X Factor](#🚀x-factor)
+12. [📁Attachments](#📁attachments)
     1. [📁Router Configurations](#📁router-configurations)
     2. [📁Firewall Configurations](#📁firewall-configurations)
     3. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
     4. [📁Timesheets](#📁timesheets)
-12. [🔗References](#🔗references)
+13. [🔗References](#🔗references)
 
 ---
 
@@ -227,6 +228,80 @@ history -c # Clear history
 ## 🧮Testing
 > Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.
 
+## 🚀X Factor
+> For our X Factor, we chose to do a price calculation of how expensive the network would be. We will calculate the price of the hardware and software we used in the network. So we provide a price for the routers, switches, servers, and software. And for the fun, we did it in a script.
+
+```bash
+#!/bin/bash
+
+# Define hardware prices
+declare -A hardware_prices=(
+    [Router1]=1000
+    [Router2]=1000
+    [Router3]=1000
+    [Switch1]=500
+    [Switch2]=500
+    [Switch3]=500
+    [Server1]=2000
+    [Server2]=2000
+    [Server3]=2000
+    [Server4]=2000
+)
+
+# Define software prices
+declare -A software_prices=(
+    [Pfsense]=0
+    [Vyos]=0
+    [Ubuntu]=0
+    [Apache2]=0
+    [Tailscale]=0
+)
+
+# Function to calculate total price
+calculate_total_price() {
+    local total=0
+    for item in "${!hardware_prices[@]}" "${!software_prices[@]}"; do
+        price=$(get_price "$item")
+        if [[ -n $price ]]; then
+            total=$((total + price))
+        else
+            echo "Price for $item not found." >&2
+        fi
+    done
+    echo "$total"
+}
+
+# Function to get price for a particular item
+get_price() {
+    local item=$1
+    local price
+
+    if [[ -v hardware_prices[$item] ]]; then
+        price=${hardware_prices[$item]}
+    elif [[ -v software_prices[$item] ]]; then
+        price=${software_prices[$item]}
+    else
+        return 1
+    fi
+
+    echo "$price"
+}
+
+# Function to print total price
+print_total_price() {
+    local total=$(calculate_total_price)
+    echo "The total price of the network is $total"
+}
+
+# Main program
+main() {
+    print_total_price
+}
+
+# Execute main program
+main
+```
+
 ## 📁Attachments
 
 ### 📁Router Configurations
@@ -245,6 +320,16 @@ history -c # Clear history
 | Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
 | Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
 | Elias De Hondt| 15/04/2024 | 5h    | Redundant Web Servers |
+
+### 📁DO TO
+- [] Documentation
+- [x] Network Design
+- [x] Addressing/names
+- [] Firewall Rules
+- [x] Redundant Web Servers
+- [] Redundant Router
+- [] VPN Services
+- [x] X-Factor
 
 ## 🔗References
 - [Tailscale](https://tailscale.com)

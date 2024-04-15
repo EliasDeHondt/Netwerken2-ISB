@@ -65,6 +65,7 @@
     </head>
     <body>
     <h1>Redundant Web Servers DEMO</h1>
+    <h1>Webserver 2</h1>
     <p>This page is hosted on multiple web servers. The background color is stored in a database file. When you change the color, the change will be visible on all servers.</p>
     <br>
     <form method="post">

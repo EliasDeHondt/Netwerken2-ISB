@@ -150,13 +150,13 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 - Database
     - [CSV File](/Scripts/database.csv)
 - Apache2 Webserver 1
-    - [Index File](/Scripts/index.php)
-    - [Apache2 Config](/Scripts/webserver1.conf)
+    - [Index File](/Scripts/index1.php)
+    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
 - Apache2 Webserver 2
-    - [Index File](/Scripts/index.php)
-    - [Apache2 Config](/Scripts/webserver2.conf)
+    - [Index File](/Scripts/index2.php)
+    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
 - Apache2 Load Balancer
-    - [Load Balancer Config](/Scripts/load_balancer.conf)
+    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
 
 > Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
 
@@ -172,6 +172,7 @@ sudo a2enmod proxy proxy_http
 sudo a2enmod lbmethod_byrequests
 
 # Firewall Configuratie:
+sudo ufw allow 22
 sudo ufw allow 80
 sudo ufw allow 8001
 sudo ufw allow 8002
@@ -201,14 +202,14 @@ sudo rm -r /etc/apache2/sites-enabled/000-default.conf
 git clone https://github.com/EliasDeHondt/Netwerken2-ISB.git
 sudo mkdir /var/www/webserver1
 sudo mkdir /var/www/webserver2
-sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver1/
-sudo cp Netwerken2-ISB/Scripts/index.php /var/www/webserver2/
+sudo cp Netwerken2-ISB/Scripts/index1.php /var/www/webserver1/
+sudo cp Netwerken2-ISB/Scripts/index2.php /var/www/webserver2/
 sudo cp Netwerken2-ISB/Scripts/redundant-web-servers-demo.conf.conf /etc/apache2/sites-available/
 sudo a2ensite redundant-web-servers-demo.conf
 
 # Database setup:
 sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
-sudo chmod 777 /var/www/database.csv
+sudo chmod 755 /var/www/database.csv
 
 # Clean up:
 sudo systemctl reload apache2

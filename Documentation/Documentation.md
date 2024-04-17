@@ -155,12 +155,12 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
     - [CSV File](/Scripts/database.csv)
 - Apache2 Webserver 1
     - [Index File](/Scripts/index1.php)
-    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
+    - [Apache2 Config](/Scripts/webserver1.conf)
 - Apache2 Webserver 2
     - [Index File](/Scripts/index2.php)
-    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
+    - [Apache2 Config](/Scripts/webserver2.conf)
 - Apache2 Load Balancer
-    - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
+    - [Apache2 Config](/Scripts/loadbalancer.conf)
 
 - Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
 
@@ -208,8 +208,12 @@ sudo mkdir /var/www/webserver1
 sudo mkdir /var/www/webserver2
 sudo cp Netwerken2-ISB/Scripts/index1.php /var/www/webserver1/
 sudo cp Netwerken2-ISB/Scripts/index2.php /var/www/webserver2/
-sudo cp Netwerken2-ISB/Scripts/redundant-web-servers-demo.conf.conf /etc/apache2/sites-available/
-sudo a2ensite redundant-web-servers-demo.conf
+sudo cp Netwerken2-ISB/Scripts/webserver1.conf /etc/apache2/sites-available/
+sudo cp Netwerken2-ISB/Scripts/webserver2.conf /etc/apache2/sites-available/
+sudo cp Netwerken2-ISB/Scripts/loadbalancer.conf /etc/apache2/sites-available/
+sudo a2ensite webserver1.conf
+sudo a2ensite webserver2.conf
+sudo a2ensite loadbalancer.conf
 
 # Database setup:
 sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
@@ -222,7 +226,29 @@ history -c # Clear history
 ```
 
 ## 🧮Testing
-> Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.
+- We can easily show that there are 2 apache2 servers running with a load balancer in front of them. If we go to the IP address of the [Load Balancer](http://192.168.70.133), You can see that the server name e.g. `Webserver 1` is shown on the website and if you refresh the web page a few times you will see it change, so we are being redirected to another server.
+
+<video width="640" height="360" controls>
+  <source src="/Videos/testing_of_loadbalancing.mp4" type="video/mp4">
+</video>
+
+
+- We can also see that they share a common [File](/Scripts/database.csv) so that the web pages are synchronized between the servers. If we change the background color on one server, the other server will also change the background color.
+
+- We can also show that the servers are redundant by stopping one of the servers and refreshing the web page. The load balancer will redirect us to the other server.
+```bash
+sudo a2dissite webserver2.conf
+sudo systemctl reload apache2
+```
+- The commands above would be an elegant solution, but this does not work. Because if we do this, the primary server that is currently hosting all of our instances will still be online and will give a response `404` back. So in other words, the load balancer will still think it can redirect to that server.
+
+- So to test that our load balancer is working, we are simply going to add an IP address of a server that is not currently online.
+```bash
+sudo nano /etc/apache2/sites-available/loadbalancer.conf # BalancerMember "http://192.168.70.121:8003" retry=60 status=+H
+sudo systemctl reload apache2
+```
+
+> The first commands seen here would work perfectly if you were running both the load balancer and the two web servers on separate VMs or physical machines. But because we are running everything on one server, the commands above will not work. So we have to do it the way we did it.
 
 ## 🚀X Factor
 - For our X Factor, we chose to do a price calculation of how expensive the network would be. We will calculate the price of the hardware and software we used in the network. So we provide a price for the routers, switches, servers, and software. And for the fun, we did it in a script.
@@ -314,7 +340,7 @@ main
 | Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
 | Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
 | Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
-| Elias De Hondt| 15/04/2024 | 1h    | DMZ Services          |
+| Elias De Hondt| 15/04/2024 | 3h    | DMZ Services          |
 
 ### 📁DO TO
 - [] Documentation

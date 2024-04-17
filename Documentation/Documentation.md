@@ -229,7 +229,7 @@ history -c # Clear history
 > Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.
 
 ## 🚀X Factor
-> For our X Factor, we chose to do a price calculation of how expensive the network would be. We will calculate the price of the hardware and software we used in the network. So we provide a price for the routers, switches, servers, and software. And for the fun, we did it in a script.
+- For our X Factor, we chose to do a price calculation of how expensive the network would be. We will calculate the price of the hardware and software we used in the network. So we provide a price for the routers, switches, servers, and software. And for the fun, we did it in a script.
 
 ```bash
 #!/bin/bash
@@ -307,7 +307,6 @@ main
 ### 📁Router Configurations
 
 ### 📁Firewall Configurations
-> (deze mogen ook Linux iptables regels zijn, of een vyos configuratie of  Cisco router configuraties)
 
 ### 📁Server Configurations & Scripts
 [Scripts Folder](/Scripts)

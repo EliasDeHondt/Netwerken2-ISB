@@ -314,7 +314,7 @@ main
 | Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
 | Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
 | Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
-| Elias De Hondt| 15/04/2024 | 5h    | RDMZ Services         |
+| Elias De Hondt| 15/04/2024 | 1h    | DMZ Services          |
 
 ### 📁DO TO
 - [] Documentation

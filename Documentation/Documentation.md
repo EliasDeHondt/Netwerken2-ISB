@@ -15,17 +15,16 @@
     1. [🚬VPN Settings For A Client](#🚬vpn-settings-for-a-client)
     2. [🚬Server Settings](#🚬server-settings)
     3. [🚬VPN Test](#🚬vpn-test)
-7. [🕸️Redundant Web Servers](#🕸️redundant-web-servers)
-8. [🛡️Firewall Rules](#🛡️firewall-rules)
-9. [🪖DMZ Services](#🪖dmz-services)
-10. [🧮Testing](#🧮testing)
-11. [🚀X Factor](#🚀x-factor)
-12. [📁Attachments](#📁attachments)
+7. [🛡️Firewall Rules](#🛡️firewall-rules)
+8. [🪖DMZ Services](#🪖dmz-services)
+9. [🧮Testing](#🧮testing)
+10. [🚀X Factor](#🚀x-factor)
+11. [📁Attachments](#📁attachments)
     1. [📁Router Configurations](#📁router-configurations)
     2. [📁Firewall Configurations](#📁firewall-configurations)
     3. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
     4. [📁Timesheets](#📁timesheets)
-13. [🔗References](#🔗references)
+12. [🔗References](#🔗references)
 
 ---
 
@@ -143,8 +142,14 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 > Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
 > Schrijf de testprocedure hiervoor uit. Welke aanpassingen moest je maken aan de routetabel of aan de encryptie?
 
-## 🕸️Redundant Web Servers
-> This will all be achieved with apache2 and a simple database a .csv file. A webpage will be hosted on multiple web servers. On this webpage, you can modify a value that will change the background color of the webpage. This new value will be stored in a file or database. Subsequently, the other web servers will be automatically updated with the new background.
+## 🛡️Firewall Rules
+> Firewall voor je LAN
+> Schrijf alle regels die gelden tussen de LAN en de DMZ/Internet in woorden uit.
+> Firewall voor Internet (denk ook aan VPN)
+> Schrijf alle regels die gelden tussen Internet en de DMZ/LAN in woorden uit.
+
+## 🪖DMZ Services
+- This will all be achieved with apache2 and a simple database a .csv file. A webpage will be hosted on multiple web servers. On this webpage, you can modify a value that will change the background color of the webpage. This new value will be stored in a file or database. Subsequently, the other web servers will be automatically updated with the new background.
 
 - Database
     - [CSV File](/Scripts/database.csv)
@@ -157,7 +162,7 @@ Wij zullen pfsense gebruiken als router software, hierop heb je een package mana
 - Apache2 Load Balancer
     - [Apache2 Config](/Scripts/redundant-web-servers-demo.conf)
 
-> Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
+- Everything will be hosted on one Ubuntu server 20.04 LTS 64-bit with apache2 for the demo. See the [Network Design](#🎨network-design) for the real physical setup.
 
 ```bash
 # Basic setup:
@@ -215,15 +220,6 @@ sudo systemctl reload apache2
 sudo rm -r Netwerken2-ISB
 history -c # Clear history
 ```
-
-## 🛡️Firewall Rules
-> Firewall voor je LAN
-> Schrijf alle regels die gelden tussen de LAN en de DMZ/Internet in woorden uit.
-> Firewall voor Internet (denk ook aan VPN)
-> Schrijf alle regels die gelden tussen Internet en de DMZ/LAN in woorden uit.
-
-## 🪖DMZ Services
-> Geef hier een opsomming van de diensten en leg de werking uit van de high availability oplossing.
 
 ## 🧮Testing
 > Omschrijf de procedure en toon het resultaat van high availability/load balancing/stress testen van je server diensten.

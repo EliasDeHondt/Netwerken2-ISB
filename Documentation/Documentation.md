@@ -228,12 +228,9 @@ history -c # Clear history
 ## 🧮Testing
 - We can easily show that there are 2 apache2 servers running with a load balancer in front of them. If we go to the IP address of the [Load Balancer](http://192.168.70.133), You can see that the server name e.g. `Webserver 1` is shown on the website and if you refresh the web page a few times you will see it change, so we are being redirected to another server.
 
-<video width="640" height="360" controls>
-  <source src="/Videos/testing_of_loadbalancing.mp4" type="video/mp4">
-</video>
-
-
 - We can also see that they share a common [File](/Scripts/database.csv) so that the web pages are synchronized between the servers. If we change the background color on one server, the other server will also change the background color.
+
+![Load Balancer In Action](/Images/test_of_loadbalancer.gif)
 
 - We can also show that the servers are redundant by stopping one of the servers and refreshing the web page. The load balancer will redirect us to the other server.
 ```bash
@@ -248,7 +245,7 @@ sudo nano /etc/apache2/sites-available/loadbalancer.conf # BalancerMember "http:
 sudo systemctl reload apache2
 ```
 
-> The first commands seen here would work perfectly if you were running both the load balancer and the two web servers on separate VMs or physical machines. But because we are running everything on one server, the commands above will not work. So we have to do it the way we did it.
+> **NOTE:** The first commands seen here would work perfectly if you were running both the load balancer and the two web servers on separate VMs or physical machines. But because we are running everything on one server, the commands above will not work. So we have to do it the way we did it.
 
 ## 🚀X Factor
 - For our X Factor, we chose to do a price calculation of how expensive the network would be. We will calculate the price of the hardware and software we used in the network. So we provide a price for the routers, switches, servers, and software. And for the fun, we did it in a script.
@@ -334,16 +331,18 @@ main
 [Scripts Folder](/Scripts)
 
 ### 📁Timesheets
-| Name Student  | Date       | Time  | Description           |
-|---------------|------------|-------|-----------------------|
-| Elias De Hondt| 15/04/2024 | 2h    | Documentation         |
-| Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
-| Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
-| Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
-| Elias De Hondt| 15/04/2024 | 3h    | DMZ Services          |
+| Name Student   | Date       | Time  | Description           |
+|----------------|------------|-------|-----------------------|
+| Elias De Hondt | 15/04/2024 | 2h    | Documentation         |
+| Kobe Wijnants  | 15/04/2024 | 3h    | Documentation         |
+| Elias De Hondt | 15/04/2024 | 3h    | Network Design        |
+| Elias De Hondt | 15/04/2024 | 30min | Addressing/names      |
+| Elias De Hondt | 15/04/2024 | 3h    | DMZ Services          |
+| Elias De Hondt | 17/04/2024 | 30min | Testing               |
+| Kobe Wijnants  | 19/04/2024 | 4h    | VPN Services          |
 
 ### 📁DO TO
-- [] Documentation
+- [x] Documentation
 - [x] Network Design
 - [x] Addressing/names
 - [] Firewall Rules

@@ -314,14 +314,14 @@ main
 | Kobe Wijnants | 15/04/2024 | 2h    | Documentation         |
 | Elias De Hondt| 15/04/2024 | 3h    | Network Design        |
 | Kobe Wijnants | 15/04/2024 | 30min | Addressing/names      |
-| Elias De Hondt| 15/04/2024 | 5h    | Redundant Web Servers |
+| Elias De Hondt| 15/04/2024 | 5h    | RDMZ Services         |
 
 ### 📁DO TO
 - [] Documentation
 - [x] Network Design
 - [x] Addressing/names
 - [] Firewall Rules
-- [x] Redundant Web Servers
+- [x] DMZ Services
 - [] Redundant Router
 - [] VPN Services
 - [x] X-Factor

@@ -117,6 +117,7 @@ sudo tailscale up
 - Then login and you should be connected to the tailnet
 
 ### 🚬VPN Settings For A Server
+
 - Open the terminal and run:
 
 ```bash
@@ -136,11 +137,20 @@ sudo tailscale up --authkey=[Authkey] --ssh
 
 ### 🚬VPN Settings For A Router
 
-Wij zullen pfsense gebruiken als router software, hierop heb je een package manager met de package "tailscaled"
+We will use a pfsense router for this because it has a package manager with a "Tailscale" package in it.
+
+- Go to the package manager and install "Tailscale"
+
+- Then, go to VPN > Tailscale > Authentication
+
+- Request an auth key at: [Tailscale Login](https://login.tailscale.com/admin/settings/keys) and fill it in
+
+- Then go to tailscale settings and enable the service
+
+- Finnally advertise the subnet you want to share with your vpn clients
 
 ### 🚬VPN Test
-> Een VPN-client moet minimum via de VPN server aan bv een DMZ server.
-> Schrijf de testprocedure hiervoor uit. Welke aanpassingen moest je maken aan de routetabel of aan de encryptie?
+
 
 ## 🛡️Firewall Rules
 > Firewall voor je LAN

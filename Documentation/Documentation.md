@@ -349,7 +349,7 @@ main
 | Elias De Hondt | 15/04/2024 | 30min | Addressing/names      |
 | Elias De Hondt | 15/04/2024 | 3h    | DMZ Services          |
 | Elias De Hondt | 17/04/2024 | 30min | Testing               |
-| Kobe Wijnants  | 19/04/2024 | 4h    | VPN Services          |
+| Kobe Wijnants  | 20/04/2024 | 4h    | VPN Services          |
 
 ### 📁DO TO
 - [x] Documentation

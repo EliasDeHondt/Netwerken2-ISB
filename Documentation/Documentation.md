@@ -151,6 +151,16 @@ We will use a pfsense router for this because it has a package manager with a "T
 
 ### 🚬VPN Test
 
+- Ping to a DMZ service
+
+The left powershell window is on my local machine, the right terminal is on a debian machine running docker with some web services.
+On both machines tailscale is installed and working.
+
+![ping to DMZ service](/Images/test_VPN_ping_to_DMZ_service.gif)
+
+- Ping to router and ip's advertised by the router
+
+
 
 ## 🛡️Firewall Rules
 > Firewall voor je LAN
@@ -349,7 +359,7 @@ main
 | Elias De Hondt | 15/04/2024 | 30min | Addressing/names      |
 | Elias De Hondt | 15/04/2024 | 3h    | DMZ Services          |
 | Elias De Hondt | 17/04/2024 | 30min | Testing               |
-| Kobe Wijnants  | 19/04/2024 | 4h    | VPN Services          |
+| Kobe Wijnants  | 20/04/2024 | 4h    | VPN Services          |
 
 ### 📁DO TO
 - [x] Documentation

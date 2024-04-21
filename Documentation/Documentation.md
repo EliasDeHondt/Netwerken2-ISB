@@ -348,7 +348,7 @@ main
 - [] Firewall Rules
 - [x] DMZ Services
 - [] Redundant Router
-- [] VPN Services
+- [x] VPN Services
 - [x] X-Factor
 
 ## 🔗References

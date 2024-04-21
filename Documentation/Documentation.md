@@ -160,13 +160,34 @@ On both machines tailscale is installed and working.
 
 - Ping to router and ip's advertised by the router
 
-
-
 ## 🛡️Firewall Rules
-> Firewall voor je LAN
-> Schrijf alle regels die gelden tussen de LAN en de DMZ/Internet in woorden uit.
-> Firewall voor Internet (denk ook aan VPN)
-> Schrijf alle regels die gelden tussen Internet en de DMZ/LAN in woorden uit.
+- Router 1 (Gig1/0):
+    - Allow port `80` from the `WAN` to the `DMZ`
+    - Allow port `443` from the `WAN` to the `DMZ`
+    - Allow port `80` from the `DMZ` to the `LAN`
+    - Allow port `443` from the `DMZ` to the `LAN`
+    - Deny all other traffic
+
+- Router 1 (Gig0/0):
+    - Deny all traffic from the `WAN` to the `LAN`
+    - Allow port `80` from the `LAN` to the `WAN`
+    - Allow port `443` from the `LAN` to the `WAN`
+    - Allow port `80` from the `LAN` to the `DMZ`
+    - Allow port `443` from the `LAN` to the `DMZ`
+
+- Router 2 (Gig1/0):
+    - Allow port `80` from the `WAN` to the `DMZ`
+    - Allow port `443` from the `WAN` to the `DMZ`
+    - Allow port `80` from the `DMZ` to the `LAN`
+    - Allow port `443` from the `DMZ` to the `LAN`
+    - Deny all other traffic
+
+- Router 2 (Gig0/0):
+    - Deny all traffic from the `WAN` to the `LAN`
+    - Allow port `80` from the `LAN` to the `WAN`
+    - Allow port `443` from the `LAN` to the `WAN`
+    - Allow port `80` from the `LAN` to the `DMZ`
+    - Allow port `443` from the `LAN` to the `DMZ`
 
 ## 🪖DMZ Services
 - This will all be achieved with apache2 and a simple database a .csv file. A webpage will be hosted on multiple web servers. On this webpage, you can modify a value that will change the background color of the webpage. This new value will be stored in a file or database. Subsequently, the other web servers will be automatically updated with the new background.
@@ -344,8 +365,68 @@ main
 ## 📁Attachments
 
 ### 📁Router Configurations
+```conf
+
+```
 
 ### 📁Firewall Configurations
+
+#### Cisco IOS (Router 1):
+```conf
+conf t
+!
+access-list 101 permit tcp any any eq 80
+access-list 101 permit tcp any any eq 443
+!
+interface GigabitEthernet1/0
+description WAN to DMZ
+ip access-group 101 in
+exit
+!
+access-list 102 permit tcp any any eq 80
+access-list 102 permit tcp any any eq 443
+access-list 102 deny ip any any
+!
+interface GigabitEthernet0/0
+description LAN to WAN
+ip access-group 102 out
+exit
+!
+interface Vlan1
+description DMZ to LAN
+ip access-group 101 in
+exit
+!
+end
+```
+#### Cisco IOS (Router 2):
+```conf
+conf t
+!
+access-list 201 permit tcp any any eq 80
+access-list 201 permit tcp any any eq 443
+!
+interface GigabitEthernet1/0
+description WAN to DMZ
+ip access-group 201 in
+exit
+!
+access-list 202 permit tcp any any eq 80
+access-list 202 permit tcp any any eq 443
+access-list 202 deny ip any any
+!
+interface GigabitEthernet0/0
+description LAN to WAN
+ip access-group 202 out
+exit
+!
+interface Vlan1
+description DMZ to LAN
+ip access-group 201 in
+exit
+!
+end
+```
 
 ### 📁Server Configurations & Scripts
 [Scripts Folder](/Scripts)
@@ -360,12 +441,13 @@ main
 | Elias De Hondt | 15/04/2024 | 3h    | DMZ Services          |
 | Elias De Hondt | 17/04/2024 | 30min | Testing               |
 | Kobe Wijnants  | 20/04/2024 | 4h    | VPN Services          |
+| Elias De Hondt | 21/04/2024 | 15min | Firewall Rules        |
 
 ### 📁DO TO
 - [x] Documentation
 - [x] Network Design
 - [x] Addressing/names
-- [] Firewall Rules
+- [x] Firewall Rules
 - [x] DMZ Services
 - [] Redundant Router
 - [x] VPN Services
@@ -378,3 +460,4 @@ main
 - [Vyos](https://www.vyos.io)
 - [Apache2](https://httpd.apache.org)
 - [Ubuntu](https://ubuntu.com)
+- [KDG](https://www.kdg.be)

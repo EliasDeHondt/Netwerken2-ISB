@@ -164,6 +164,7 @@ On both machines tailscale is installed and working.
 - Router 1 (Gig1/0):
     - Allow port `80` from the `WAN` to the `DMZ`
     - Allow port `443` from the `WAN` to the `DMZ`
+    - Allow port `41641` from the `WAN` to the `DMZ`
     - Allow port `80` from the `DMZ` to the `LAN`
     - Allow port `443` from the `DMZ` to the `LAN`
     - Deny all other traffic
@@ -178,6 +179,7 @@ On both machines tailscale is installed and working.
 - Router 2 (Gig1/0):
     - Allow port `80` from the `WAN` to the `DMZ`
     - Allow port `443` from the `WAN` to the `DMZ`
+    - Allow port `41641` from the `WAN` to the `DMZ`
     - Allow port `80` from the `DMZ` to the `LAN`
     - Allow port `443` from the `DMZ` to the `LAN`
     - Deny all other traffic

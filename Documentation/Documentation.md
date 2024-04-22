@@ -40,16 +40,16 @@ This is the documentation for the project of the course `Network 2 - ISB` at the
 ## 🎨Network Design
 
 ### 🎨Globel Design
-![Globel Design](/images/globel_design.png)
+![Globel Design](/Images/globel_design.png)
 
 ### 🎨WAN Design
-![WAN Design](/images/wan_design.png)
+![WAN Design](/Images/wan_design.png)
 
 ### 🎨DMZ Design
-![DMZ Design](/images/dmz_design.png)
+![DMZ Design](/Images/dmz_design.png)
 
 ### 🎨LAN Design
-![LAN Design](/images/lan_design.png)
+![LAN Design](/Images/lan_design.png)
 
 ## 🔎Addressing/names
 

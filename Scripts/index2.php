@@ -3,7 +3,7 @@
         if (isset($_POST['color']) && !empty($_POST['color'])) {
             $color = $_POST['color'];
             $color = htmlspecialchars($color);
-            file_put_contents("../database.csv", $color);
+            file_put_contents("http://192.168.70.133/database.csv", $color);
             echo '<meta http-equiv="refresh" content="0">';
         }
     }
@@ -20,7 +20,7 @@
         <!--CSS-->
         <style>
             body {
-                background-color: <?php echo htmlspecialchars(file_get_contents("../database.csv")); ?>;
+                background-color: <?php echo htmlspecialchars(file_get_contents("http://192.168.70.133/database.csv")); ?>;
                 display: flex;
                 flex-direction: column;
                 align-items: center;

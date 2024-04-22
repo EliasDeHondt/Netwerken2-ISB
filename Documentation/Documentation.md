@@ -443,6 +443,9 @@ end
 | Elias De Hondt | 17/04/2024 | 30min | Testing               |
 | Kobe Wijnants  | 20/04/2024 | 4h    | VPN Services          |
 | Elias De Hondt | 21/04/2024 | 15min | Firewall Rules        |
+| Kobe Wijnants  | 22/04/2024 | 3h    | HA pfsense            |
+| Elias De Hondt | 22/04/2024 | 3h    | apache + slides       |
+| Kobe Wijnants  | 22/04/2024 | 2h    | HA pfsense            |
 
 ### 📁DO TO
 - [x] Documentation

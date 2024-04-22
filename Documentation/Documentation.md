@@ -453,7 +453,7 @@ end
 - [x] Addressing/names
 - [x] Firewall Rules
 - [x] DMZ Services
-- [] Redundant Router
+- [x] Redundant Router
 - [x] VPN Services
 - [x] X-Factor
 

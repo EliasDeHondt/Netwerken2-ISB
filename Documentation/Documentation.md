@@ -443,9 +443,9 @@ end
 | Elias De Hondt | 17/04/2024 | 30min | Testing               |
 | Kobe Wijnants  | 20/04/2024 | 4h    | VPN Services          |
 | Elias De Hondt | 21/04/2024 | 15min | Firewall Rules        |
-| Kobe Wijnants  | 22/04/2024 | 3h    | HA pfsense            |
-| Elias De Hondt | 22/04/2024 | 3h    | apache + slides       |
-| Kobe Wijnants  | 22/04/2024 | 2h    | HA pfsense            |
+| Kobe Wijnants  | 22/04/2024 | 3h    | HA PFsense            |
+| Elias De Hondt | 22/04/2024 | 3h    | Slides                |
+| Kobe Wijnants  | 22/04/2024 | 2h    | HA PFsense            |
 
 - Elias De Hondt: 14h 45min
 - Kobe Wijnants: 12h

@@ -447,6 +447,9 @@ end
 | Elias De Hondt | 22/04/2024 | 3h    | apache + slides       |
 | Kobe Wijnants  | 22/04/2024 | 2h    | HA pfsense            |
 
+- Elias De Hondt: 14h 45min
+- Kobe Wijnants: 12h
+
 ### 📁DO TO
 - [x] Documentation
 - [x] Network Design

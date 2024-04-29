@@ -15,16 +15,18 @@
     1. [🚬VPN Settings For A Client](#🚬vpn-settings-for-a-client)
     2. [🚬Server Settings](#🚬server-settings)
     3. [🚬VPN Test](#🚬vpn-test)
-7. [🛡️Firewall Rules](#🛡️firewall-rules)
-8. [🪖DMZ Services](#🪖dmz-services)
-9. [🧮Testing](#🧮testing)
-10. [🚀X Factor](#🚀x-factor)
-11. [📁Attachments](#📁attachments)
-    1. [📁Router Configurations](#📁router-configurations)
-    2. [📁Firewall Configurations](#📁firewall-configurations)
-    3. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
-    4. [📁Timesheets](#📁timesheets)
-12. [🔗References](#🔗references)
+7. [🚬2 Routers](#🚬2-routers)
+    1. [🚬PSsense setup](#🚬pssense-setup)
+8. [🛡️Firewall Rules](#🛡️firewall-rules)
+9. [🪖DMZ Services](#🪖dmz-services)
+10. [🧮Testing](#🧮testing)
+11. [🚀X Factor](#🚀x-factor)
+12. [📁Attachments](#📁attachments)
+    1. [📁Firewall Configurations](#📁firewall-configurations)
+    2. [📁Server Configurations & Scripts](#📁server-configurations--scripts)
+    3. [📁Timesheets](#📁timesheets)
+    4. [📁DO TO](#📁do-to)
+13. [🔗References](#🔗references)
 
 ---
 
@@ -160,13 +162,13 @@ On both machines tailscale is installed and working.
 
 - Ping to router and ip's advertised by the router
 
-## 2 Routers
+## 🚬2 Routers
 
 We will work with gns3 to simulate 2 pfsense routers in a network using the following design:
 
 ![gns3 design](/Images/gns3_design.png)
 
-### pfsense setup
+### 🚬PSsense setup
 
 [Pfsense HA](https://docs.netgate.com/pfsense/en/latest/recipes/high-availability.html)
 
@@ -421,7 +423,7 @@ main
 
 ### 📁Firewall Configurations
 
-#### Cisco IOS (Router 1):
+#### 📁Cisco IOS (Router 1):
 ```conf
 conf t
 !
@@ -449,7 +451,7 @@ exit
 !
 end
 ```
-#### Cisco IOS (Router 2):
+#### 📁Cisco IOS (Router 2):
 ```conf
 conf t
 !

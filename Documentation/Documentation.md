@@ -160,6 +160,59 @@ On both machines tailscale is installed and working.
 
 - Ping to router and ip's advertised by the router
 
+## 2 Routers
+
+We will work with gns3 to simulate 2 pfsense routers in a network using the following design:
+
+![gns3 design](/Images/gns3_design.png)
+
+### pfsense setup
+
+[Pfsense HA](https://docs.netgate.com/pfsense/en/latest/recipes/high-availability.html)
+
+0) Requirements:
+
+- 3 interfaces:
+  - WAN (pf1 192.168.0.248, pf2 192.168.0.173) dhcp
+  - LAN (pf1 192.168.1.1, pf2 192.168.1.2) static
+  - SYNC (pf1 10.0.0.1, pf2 10.0.0.2) static
+    - open everything in the firewall rules
+- Configure DHCP server on LAN pf1
+
+1) Configure HA
+
+- Go to System > High Availability Sync
+- Enable and set the sync interface to "SYNC"
+- Set sync config to IP to 10.0.0.1
+- Set remote system username to "admin"
+- And set the password to the password you set of pf2
+- Then toggle everything to sync everything to pf2
+
+2) Configure virtual IP
+
+- Go to Firewall > Virtual IP
+- Select CARP
+- Select LAN and fill in the desired settings
+- Then do the same for WAN
+
+3) Set outbound IP to virtual WAN IP
+
+- Go to Firewall > NAT > Outbound
+- Select WAN for the interface
+- Select "Network" for the source and fill in your WAN side subnet
+- Select your WAN virtual IP as the translation address
+
+4) Fix DHCP server
+
+- Go to Services > DHCP server
+- Change Gateway to the virtual LAN IP
+- And set failover to the IP of pf2 (automaticly the failover in pf2 will be set to pf1)
+
+5) Test
+
+Everything should be done, in status > CARP failover you can see which one is the MASTER.
+turn it off and see if packets are still sent and received.
+
 ## 🛡️Firewall Rules
 - Router 1 (Gig1/0):
     - Allow port `80` from the `WAN` to the `DMZ`
@@ -365,10 +418,6 @@ main
 ```
 
 ## 📁Attachments
-
-### 📁Router Configurations
-
-![gns3 design](/Images/gns3_design.png)
 
 ### 📁Firewall Configurations
 

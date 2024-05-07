@@ -315,7 +315,7 @@ sudo a2ensite loadbalancer.conf
 
 # Database setup:
 sudo cp Netwerken2-ISB/Scripts/database.csv /var/www/
-sudo chmod 755 /var/www/database.csv
+sudo chmod 775 /var/www/database.csv
 
 # Clean up:
 sudo systemctl reload apache2

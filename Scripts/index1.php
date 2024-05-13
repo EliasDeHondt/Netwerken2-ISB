@@ -68,9 +68,9 @@
         <br><br>
         <input type="submit" value="Submit">
     </form>
-    <!--Bottom-->
-    <footer id="Bottom"></footer>
-    <!--Bottom-->
+    <!--Footer-->
+    <footer id="footer"></footer>
+    <!--Footer-->
     <!--JS-->
     <script>
         function loadHTML(myDivId, url) {
@@ -93,7 +93,7 @@
             xmlhttp.open("GET", url, true);
             xmlhttp.send();
         }
-        loadHTML("Bottom", "https://eliasdh.com/assets/includes/bottom-external.html");
+        loadHTML("footer", "https://eliasdh.com/assets/includes/external-footer.html");
     </script>
     <!--JS-->
     </body>
